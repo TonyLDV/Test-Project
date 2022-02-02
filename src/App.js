@@ -12,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<PostsPage />} />
         <Route path="about" element={<About />} />
+        <Route path="*" element={<PostsPage to="/" />} />
       </Routes>
     </BrowserRouter>
   );
