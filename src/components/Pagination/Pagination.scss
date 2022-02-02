@@ -1,0 +1,25 @@
+.pagination {
+  margin-bottom: 25px;
+  justify-content: center;
+
+  &__item {
+    margin: 0 6px;
+    padding: 5px 10px;
+    background: purple;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    transition: 0.5s;
+
+    &__active {
+      background: orange;
+      margin: 0 6px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 8px;
+    }
+    &:hover {
+      background: #b30fb3;
+    }
+  }
+}

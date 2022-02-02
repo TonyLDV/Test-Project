@@ -1,0 +1,19 @@
+.post-form {
+  width: 600px;
+  &__title {
+    margin-bottom: 10px;
+  }
+
+  &__description {
+    margin: 10px 0;
+  }
+
+  &__btn-create {
+    margin: 10px 0;
+    background: purple;
+    color: white;
+    &:hover {
+      color: white;
+    }
+  }
+}

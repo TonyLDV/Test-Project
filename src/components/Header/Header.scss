@@ -1,0 +1,18 @@
+.navbar {
+  width: 1300px;
+  display: flex;
+  justify-content: flex-start;
+  background: #6d21bf;
+
+  &__item {
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+    color: orange;
+    transition: 1s;
+    &:hover {
+      color: #c28309;
+    }
+  }
+}

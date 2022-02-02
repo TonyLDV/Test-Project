@@ -1,0 +1,21 @@
+.spb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-margin {
+  margin: 10px 0;
+}
+
+.post {
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+  &__del-btn {
+    border: none;
+    background: none;
+    border-radius: 20px;
+  }
+}
