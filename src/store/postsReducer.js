@@ -9,7 +9,7 @@ import {
 const initialState = {
   posts: [
     {
-      id: 0,
+      _id: 0,
       title: "First Post",
       body: "Lorem ipsum dolor sit amet.",
     },
@@ -37,14 +37,14 @@ export const postsReducer = (state = initialState, action) => {
       switch (action.payload.type) {
         case "default":
           const indexPost = state.posts.findIndex(
-            (post) => post.id === action.payload.id
+            (post) => post._id === action.payload.id
           );
           const updatedPosts = [...state.posts];
           updatedPosts.splice(indexPost, 1);
           return { ...state, posts: updatedPosts };
         case "async":
           const indexAsyncPost = state.fetchedPosts.findIndex(
-            (post) => post.id === action.payload.id
+            (post) => post._id === action.payload.id
           );
           const asyncPosts = [...state.fetchedPosts];
           asyncPosts.splice(indexAsyncPost, 1);

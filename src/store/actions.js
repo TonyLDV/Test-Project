@@ -42,8 +42,6 @@ export function fetchPosts(limit = 10, page = 1) {
     const response = await axios.get(
       `${config.backendApi}todos?limit=${limit}&page=${page}`
     );
-
-    console.log(response.data);
     dispatch({
       type: GET_POST_PAGES,
       payload: response.data.total,
@@ -56,7 +54,7 @@ export function fetchPosts(limit = 10, page = 1) {
 export function getPostById(postId) {
   return async (dispatch) => {
     const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts/${postId}`
+      `${config.backendApi}todos/${postId}`
     );
     dispatch({ type: GET_POST_ID, payload: response.data });
   };

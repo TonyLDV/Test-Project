@@ -21,7 +21,7 @@ const PostIdPage = () => {
           <div className="card-title">
             <div className="post__info">
               <strong>
-                {activePost.id}. {activePost.title}
+                {activePost._id}. {activePost.title}
               </strong>
               {activePost.body}
             </div>

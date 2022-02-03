@@ -57,11 +57,11 @@ export default () => {
   return (
     <div>
       <div>
-        {posts.map((post) => (
+        {posts.map((post,index) => (
           <Post
             post={post}
-            key={post.id}
-            number={post.id}
+            key={post._id}
+            number={index+1}
             type="async"
             /*postDetail={onAsyncClick}*/
           />

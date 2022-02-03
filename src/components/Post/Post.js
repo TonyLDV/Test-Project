@@ -14,12 +14,12 @@ const Post = ({ post, number, type, postDetail }) => {
   const navigate = useNavigate();
 
   const onRemoveClick = () => {
-    dispatch(deletePost(post.id, type));
+    dispatch(deletePost(post._id, type));
   };
 
   const onMoreClick = () => {
-    navigate(`/posts/${post.id}`);
-    dispatch(getPostById(post.id));
+    navigate(`/posts/${post._id}`);
+    dispatch(getPostById(post._id));
   };
 
   return (

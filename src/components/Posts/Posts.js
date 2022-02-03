@@ -12,7 +12,7 @@ const Posts = () => {
     return <p className="text-center">На даный момент постов нету. =(</p>;
   }
   return posts.map((posts, index) => (
-    <Post key={posts.id} post={posts} number={index + 1} />
+    <Post key={posts._id} post={posts} number={index + 1} />
   ));
 };
 
