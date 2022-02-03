@@ -3,11 +3,12 @@ import {
   CREATE_POST,
   DELETE_POST,
   FETCH_POSTS,
-  GET_POST_COUNT,
+  GET_POST_PAGES,
   GET_POST_ID,
   HIDE_LOADER,
   SHOW_LOADER,
 } from "./types";
+import {config} from "../config";
 
 export function createPost(post) {
   return {
@@ -39,13 +40,15 @@ export function fetchPosts(limit = 10, page = 1) {
   return async (dispatch) => {
     dispatch(showLoader());
     const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${page}`
+      `${config.backendApi}todos?limit=${limit}&page=${page}`
     );
+
+    console.log(response.data);
     dispatch({
-      type: GET_POST_COUNT,
-      payload: response.headers["x-total-count"],
+      type: GET_POST_PAGES,
+      payload: response.data.total,
     });
-    dispatch({ type: FETCH_POSTS, payload: response.data });
+    dispatch({ type: FETCH_POSTS, payload: response.data.data });
     dispatch(hideLoader());
   };
 }

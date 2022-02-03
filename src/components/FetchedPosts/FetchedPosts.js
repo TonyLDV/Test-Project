@@ -16,7 +16,7 @@ export default () => {
   const [currentPage, setCurrentPage] = useState(1);
   const {
     app: { loading },
-    posts: { fetchedPosts: posts, count: postsLength },
+    posts: { fetchedPosts: posts, pages },
   } = useSelector((state) => state);
 
   const onPageChange = (page) => {
@@ -71,7 +71,7 @@ export default () => {
       <Pagination
         onPageChange={onPageChange}
         currentPage={currentPage}
-        maxPage={Math.ceil(postsLength / postNumb)}
+        maxPage={pages}
       />
     </div>
   );

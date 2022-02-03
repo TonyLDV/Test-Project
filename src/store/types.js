@@ -4,4 +4,4 @@ export const GET_POST_ID = "POST/GET_POST_ID";
 export const DELETE_POST = "POST/DELETE_POST";
 export const SHOW_LOADER = "APP/SHOW_LOADER";
 export const HIDE_LOADER = "APP/HIDE_LOADER";
-export const GET_POST_COUNT = "POST/GET_POST_COUNT";
+export const GET_POST_PAGES = "POST/GET_POST_COUNT";
