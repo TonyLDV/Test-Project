@@ -1,4 +1,10 @@
-import { CREATE_POST, DELETE_POST, FETCH_POSTS, GET_POST_COUNT } from "./types";
+import {
+  CREATE_POST,
+  DELETE_POST,
+  FETCH_POSTS,
+  GET_POST_COUNT,
+  GET_POST_ID,
+} from "./types";
 
 const initialState = {
   posts: [
@@ -9,6 +15,7 @@ const initialState = {
     },
   ],
   fetchedPosts: [],
+  activePost: { id: "", title: "", body: "" },
   count: 0,
 };
 
@@ -19,6 +26,9 @@ export const postsReducer = (state = initialState, action) => {
 
     case FETCH_POSTS:
       return { ...state, fetchedPosts: action.payload };
+
+    case GET_POST_ID:
+      return { ...state, activePost: action.payload };
 
     case GET_POST_COUNT:
       return { ...state, count: action.payload };

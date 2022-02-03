@@ -4,6 +4,7 @@ import {
   DELETE_POST,
   FETCH_POSTS,
   GET_POST_COUNT,
+  GET_POST_ID,
   HIDE_LOADER,
   SHOW_LOADER,
 } from "./types";
@@ -46,5 +47,14 @@ export function fetchPosts(limit = 10, page = 1) {
     });
     dispatch({ type: FETCH_POSTS, payload: response.data });
     dispatch(hideLoader());
+  };
+}
+
+export function getPostById(postId) {
+  return async (dispatch) => {
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/posts/${postId}`
+    );
+    dispatch({ type: GET_POST_ID, payload: response.data });
   };
 }

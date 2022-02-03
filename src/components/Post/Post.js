@@ -1,16 +1,25 @@
 import React from "react";
 
-import { Dump } from "../Icon";
-import { deletePost } from "../../store";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { Dump } from "../Icon";
+import { deletePost, getPostById } from "../../store";
 
 import "./Post.scss";
 
-const Post = ({ post, number, type }) => {
+const Post = ({ post, number, type, postDetail }) => {
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const onRemoveClick = () => {
     dispatch(deletePost(post.id, type));
+  };
+
+  const onMoreClick = () => {
+    navigate(`/posts/${post.id}`);
+    dispatch(getPostById(post.id));
   };
 
   return (
@@ -25,8 +34,14 @@ const Post = ({ post, number, type }) => {
           </div>
         </div>
 
-        <div>
-          <button className="post__del-btn" onClick={onRemoveClick}>
+        <div className="post__button-group">
+          <button className="post__button-group__more" onClick={onMoreClick}>
+            Подробнее
+          </button>
+          <button
+            className="post__button-group__delete"
+            onClick={onRemoveClick}
+          >
             <Dump />
           </button>
         </div>
