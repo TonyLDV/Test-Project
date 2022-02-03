@@ -8,7 +8,7 @@ import { deletePost, getPostById } from "../../store";
 
 import "./Post.scss";
 
-const Post = ({ post, number, type, postDetail }) => {
+const Post = ({ post, number, type, detailMode = true }) => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -35,9 +35,11 @@ const Post = ({ post, number, type, postDetail }) => {
         </div>
 
         <div className="post__button-group">
-          <button className="post__button-group__more" onClick={onMoreClick}>
-            Подробнее
-          </button>
+          {detailMode && (
+            <button className="post__button-group__more" onClick={onMoreClick}>
+              Подробнее
+            </button>
+          )}
           <button
             className="post__button-group__delete"
             onClick={onRemoveClick}

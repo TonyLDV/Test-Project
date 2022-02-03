@@ -18,9 +18,17 @@ export function createPost(post) {
 }
 
 export function deletePost(id, type = "default") {
-  return {
-    type: DELETE_POST,
-    payload: { id, type },
+  return async (dispatch) => {
+    dispatch(showLoader());
+
+    await axios.delete(`${config.backendApi}todos/${id}`);
+
+    dispatch({
+      type: DELETE_POST,
+      payload: { id, type },
+    });
+
+    dispatch(hideLoader());
   };
 }
 
@@ -39,14 +47,18 @@ export function hideLoader() {
 export function fetchPosts(limit = 10, page = 1) {
   return async (dispatch) => {
     dispatch(showLoader());
+
     const response = await axios.get(
       `${config.backendApi}todos?limit=${limit}&page=${page}`
     );
+
     dispatch({
       type: GET_POST_PAGES,
       payload: response.data.total,
     });
+
     dispatch({ type: FETCH_POSTS, payload: response.data.data });
+
     dispatch(hideLoader());
   };
 }

@@ -36,6 +36,7 @@ export const postsReducer = (state = initialState, action) => {
     case DELETE_POST:
       switch (action.payload.type) {
         case "default":
+          console.log("hello2");
           const indexPost = state.posts.findIndex(
             (post) => post._id === action.payload.id
           );
@@ -48,6 +49,8 @@ export const postsReducer = (state = initialState, action) => {
           );
           const asyncPosts = [...state.fetchedPosts];
           asyncPosts.splice(indexAsyncPost, 1);
+
+          console.log("hello");
 
           return { ...state, fetchedPosts: asyncPosts };
 

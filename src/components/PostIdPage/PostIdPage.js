@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { getPostById } from "../../store";
+import Post from "../Post";
 
 const PostIdPage = () => {
   const dispatch = useDispatch();
@@ -19,18 +20,7 @@ const PostIdPage = () => {
 
   return (
     <div className="container">
-      <div className="card card-margin ">
-        <div className="card-body spb">
-          <div className="card-title">
-            <div className="post__info">
-              <strong>
-                {activePost._id}. {activePost.title}
-              </strong>
-              {activePost.body}
-            </div>
-          </div>
-        </div>
-      </div>
+      <Post post={activePost} number={1} detailMode={false} type="async" />
     </div>
   );
 };
