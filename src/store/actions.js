@@ -8,7 +8,7 @@ import {
   HIDE_LOADER,
   SHOW_LOADER,
 } from "./types";
-import {config} from "../config";
+import { config } from "../config";
 
 export function createPost(post) {
   return {
@@ -53,9 +53,7 @@ export function fetchPosts(limit = 10, page = 1) {
 
 export function getPostById(postId) {
   return async (dispatch) => {
-    const response = await axios.get(
-      `${config.backendApi}todos/${postId}`
-    );
+    const response = await axios.get(`${config.backendApi}todos/${postId}`);
     dispatch({ type: GET_POST_ID, payload: response.data });
   };
 }
