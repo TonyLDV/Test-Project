@@ -8,7 +8,14 @@ import { deletePost } from "../../store";
 
 import "./Post.scss";
 
-const Post = ({ post, number, type, detailMode = true, editMode = false }) => {
+const Post = ({
+  post,
+  number,
+  type,
+  onEditClick,
+  detailMode = true,
+  editMode = false,
+}) => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -16,7 +23,6 @@ const Post = ({ post, number, type, detailMode = true, editMode = false }) => {
   const onRemoveClick = () => {
     dispatch(deletePost(post._id, type));
   };
-
   const onMoreClick = () => {
     navigate(`/posts/${post._id}`);
   };
@@ -39,8 +45,9 @@ const Post = ({ post, number, type, detailMode = true, editMode = false }) => {
               Подробнее
             </button>
           )}
+
           {editMode && (
-            <button className="post__button-group__more" onClick={onMoreClick}>
+            <button className="post__button-group__more" onClick={onEditClick}>
               Редактировать
             </button>
           )}

@@ -9,7 +9,7 @@ import PostForm from "../PostForm";
 
 const PostIdPage = () => {
   const dispatch = useDispatch();
-  const [showEditPost, setShowEditPost] = useState(true);
+  const [showEditPost, setShowEditPost] = useState(false);
 
   const { id } = useParams();
 
@@ -17,7 +17,7 @@ const PostIdPage = () => {
     posts: { activePost },
   } = useSelector((state) => state);
 
-  console.log(activePost);
+  console.log(activePost.title);
 
   useEffect(() => {
     dispatch(getPostById(id));
@@ -26,18 +26,21 @@ const PostIdPage = () => {
   return (
     <div className="container">
       <Post
+        onEditClick={() => setShowEditPost(true)}
         post={activePost}
         number={1}
         detailMode={false}
         editMode={true}
         type="async"
       />
+
       <Modal
         active={showEditPost}
         setActive={setShowEditPost}
         content={
           <PostForm
-            labelTitle={" Редактировать заголовок поста"}
+            isEdit={true}
+            labelTitle={"Редактировать заголовок поста"}
             labelBody={"Редактировать описание поста"}
             title={activePost.title}
             body={activePost.body}

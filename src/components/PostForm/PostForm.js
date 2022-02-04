@@ -1,36 +1,68 @@
-import React, { useState } from "react";
 import axios from "axios";
-
+import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import { createPost } from "../../store";
 import "./PostForm.scss";
+import { config } from "../../config";
+import { createPost, getPostById } from "../../store";
 
-const PostForm = ({ labelTitle, labelBody, setActive, title, body }) => {
+const PostForm = ({
+  labelTitle,
+  labelBody,
+  setActive,
+  isEdit = false,
+  title = "",
+  body = "",
+}) => {
   const dispatch = useDispatch();
-  const [post, setPost] = useState({ title, body });
+
+  const params = useParams();
+
+  const titleInputRef = useRef(null);
+  const bodyInputRef = useRef(null);
 
   const addNewPost = (e) => {
     e.preventDefault();
-    if (!post.title.length || !post.body.length) {
+
+    const titleValue = titleInputRef.current?.value;
+
+    const bodyValue = bodyInputRef.current?.value;
+
+    if (!titleValue || !bodyValue) {
       return alert(`Поля не могут быть пустыми!`);
     }
-    const newPost = {
-      ...post,
-      id: Date.now(),
-    };
-    dispatch(createPost(newPost));
-    setPost({ title: "", body: "" });
+
+    dispatch(createPost({ title: titleValue, body: bodyValue }));
 
     axios
-      .post("https://first-node-js-todos.herokuapp.com/todos/", {
-        ...post,
+      .post(`${config.backendApi}todos`, {
+        title: titleValue,
+        body: bodyValue,
       })
       .then(() => console.log("posted"));
+
+    setActive(false);
   };
 
-  const onSubmitPostClick = (e) => {
-    addNewPost(e);
+  const onUpdatePost = (e) => {
+    e.preventDefault();
+
+    const titleValue = titleInputRef.current?.value;
+
+    const bodyValue = bodyInputRef.current?.value;
+
+    if (!bodyValue || !titleValue) {
+      return alert(`Поля не могут быть пустыми!`);
+    }
+
+    axios
+      .put(`${config.backendApi}todos/${params.id}`, {
+        title: titleValue,
+        body: bodyValue,
+      })
+      .then(() => dispatch(getPostById(params.id)));
+
     setActive(false);
   };
 
@@ -42,9 +74,8 @@ const PostForm = ({ labelTitle, labelBody, setActive, title, body }) => {
         </label>
 
         <input
-          /*value={post.title}*/
+          ref={titleInputRef}
           className="form-control"
-          onChange={(e) => setPost({ ...post, title: e.target.value })}
           type="text"
           id="title"
           placeholder={labelTitle}
@@ -56,22 +87,21 @@ const PostForm = ({ labelTitle, labelBody, setActive, title, body }) => {
         </label>
 
         <input
+          ref={bodyInputRef}
           type="text"
           className="form-control"
           id="description"
           placeholder={labelBody}
-          /* value={post.body}*/
           defaultValue={body}
-          onChange={(event) => setPost({ ...post, body: event.target.value })}
         />
       </div>
 
       <button
         className="btn post-form__btn-create"
         type="submit"
-        onClick={onSubmitPostClick}
+        onClick={isEdit ? onUpdatePost : addNewPost}
       >
-        Создать
+        {isEdit ? "Обновить" : "Создать"}
       </button>
     </form>
   );
