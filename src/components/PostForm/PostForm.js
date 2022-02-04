@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import { useDispatch } from "react-redux";
-import { createPost } from "../../store";
 
+import { createPost } from "../../store";
 import "./PostForm.scss";
 
-const PostForm = ({ title, body, setActive }) => {
+const PostForm = ({ labelTitle, labelBody, setActive, title, body }) => {
   const dispatch = useDispatch();
-  const [post, setPost] = useState({ title: "", body: "" });
+  const [post, setPost] = useState({ title, body });
 
   const addNewPost = (e) => {
     e.preventDefault();
@@ -20,6 +21,12 @@ const PostForm = ({ title, body, setActive }) => {
     };
     dispatch(createPost(newPost));
     setPost({ title: "", body: "" });
+
+    axios
+      .post("https://first-node-js-todos.herokuapp.com/todos/", {
+        ...post,
+      })
+      .then(() => console.log("posted"));
   };
 
   const onSubmitPostClick = (e) => {
@@ -31,28 +38,30 @@ const PostForm = ({ title, body, setActive }) => {
     <form>
       <div className="form-group post-form">
         <label className="post-form__title" htmlFor="title">
-          {title}
+          {labelTitle}
         </label>
 
         <input
-          value={post.title}
+          /*value={post.title}*/
           className="form-control"
           onChange={(e) => setPost({ ...post, title: e.target.value })}
           type="text"
           id="title"
-          placeholder="Название поста"
+          placeholder={labelTitle}
+          defaultValue={title}
         />
 
         <label className="post-form__description" htmlFor="description">
-          {body}
+          {labelBody}
         </label>
 
         <input
           type="text"
           className="form-control"
           id="description"
-          placeholder={body}
-          value={post.body}
+          placeholder={labelBody}
+          /* value={post.body}*/
+          defaultValue={body}
           onChange={(event) => setPost({ ...post, body: event.target.value })}
         />
       </div>

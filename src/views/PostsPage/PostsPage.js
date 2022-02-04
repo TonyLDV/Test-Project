@@ -21,8 +21,8 @@ function PostsPage() {
         setActive={setShowCreatePost}
         content={
           <PostForm
-            title={"Заголовок поста"}
-            body={"Описание поста"}
+            labelTitle={"Заголовок поста"}
+            labelBody={"Описание поста"}
             setActive={setShowCreatePost}
           />
         }

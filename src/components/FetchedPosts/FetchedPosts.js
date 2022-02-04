@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Post from "../Post";
 import { Loader } from "../Loader";
 import Pagination from "../Pagination";
-import { fetchPosts, getPostById } from "../../store";
+import { fetchPosts} from "../../store";
 
 import "./FetchedPosts.scss";
-import { useNavigate, useParams } from "react-router-dom";
 
 export default () => {
   const dispatch = useDispatch();
@@ -22,10 +21,6 @@ export default () => {
   const onPageChange = (page) => {
     dispatch(fetchPosts(postNumb, page));
     setCurrentPage(page);
-  };
-
-  const onAsyncClick = (postId) => {
-    dispatch(getPostById(postId));
   };
 
   if (loading) {
@@ -57,14 +52,8 @@ export default () => {
   return (
     <div>
       <div>
-        {posts.map((post,index) => (
-          <Post
-            post={post}
-            key={post._id}
-            number={index+1}
-            type="async"
-            /*postDetail={onAsyncClick}*/
-          />
+        {posts.map((post, index) => (
+          <Post post={post} key={post._id} number={index + 1} type="async" />
         ))}
       </div>
 

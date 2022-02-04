@@ -4,11 +4,11 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { Dump } from "../Icon";
-import { deletePost, getPostById } from "../../store";
+import { deletePost } from "../../store";
 
 import "./Post.scss";
 
-const Post = ({ post, number, type, detailMode = true }) => {
+const Post = ({ post, number, type, detailMode = true, editMode = false }) => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -19,7 +19,6 @@ const Post = ({ post, number, type, detailMode = true }) => {
 
   const onMoreClick = () => {
     navigate(`/posts/${post._id}`);
-    dispatch(getPostById(post._id));
   };
 
   return (
@@ -38,6 +37,11 @@ const Post = ({ post, number, type, detailMode = true }) => {
           {detailMode && (
             <button className="post__button-group__more" onClick={onMoreClick}>
               Подробнее
+            </button>
+          )}
+          {editMode && (
+            <button className="post__button-group__more" onClick={onMoreClick}>
+              Редактировать
             </button>
           )}
           <button
